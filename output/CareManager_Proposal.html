@@ -35,6 +35,9 @@
     --pill-navy-text:#26374a;
     --pill-teal-bg:#d9f0ed;
     --pill-teal-text:#0b7a73;
+    --gantt-purple:#6a4c9c;
+    --gantt-blue:#2f5fd8;
+    --gantt-orange:#c1651f;
     --shadow: 0 20px 60px -25px rgba(14,32,52,0.25);
   }
 
@@ -172,6 +175,15 @@
   .flow-box.navy .flow-tag{color:#4a5b70;}
   .flow-box h5{font-size:13px;font-weight:700;color:var(--text-heading);margin-bottom:5px;font-family:'Inter',sans-serif;}
   .flow-box p{font-size:11.8px;color:var(--text-body-soft);line-height:1.45;}
+  .pipeline-row{display:flex;gap:10px;align-items:flex-start;margin-top:14px;}
+  .pipeline-step{flex:1;text-align:center;}
+  .pipeline-box{background:var(--mint-bg);border:1px solid var(--mint-border);border-radius:10px;padding:12px 8px;font-size:13px;font-weight:700;color:var(--text-heading);}
+  .pipeline-sub{font-size:10px;color:var(--peach-text);font-weight:600;margin-top:6px;line-height:1.4;}
+  .pipeline-arrow{color:var(--teal-solid);font-size:15px;padding-top:14px;}
+  .deployed-row{display:flex;align-items:center;gap:10px;margin-top:16px;flex-wrap:wrap;}
+  .deployed-row .dlabel{font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;color:var(--muted-subtitle);margin-right:4px;}
+  .deployed-row .darrow{color:var(--teal-solid);font-size:13px;}
+  .pill-outline{font-size:12px;font-weight:600;padding:5px 16px;border-radius:20px;background:#fff;color:var(--text-heading);border:1px solid var(--text-heading);}
   .flow-arrow{display:flex;align-items:center;color:var(--teal-solid);font-size:16px;padding:0 2px;}
   .flow-caption{text-align:center;font-size:12px;font-weight:600;color:var(--peach-text);background:var(--peach-bg);border:1px solid var(--peach-border);border-radius:20px;padding:8px 16px;margin-top:16px;display:inline-block;}
   .flow-sub{display:flex;justify-content:center;margin-top:14px;}
@@ -190,15 +202,20 @@
   /* gantt */
   .gantt-wrap{margin-top:22px;}
   .gantt{width:100%;}
-  .gantt-weeks{display:grid;grid-template-columns:112px repeat(18,1fr);font-size:8.5px;color:var(--text-body-soft);margin-bottom:6px;}
+  .gantt-weeks{display:grid;grid-template-columns:150px repeat(18,1fr);font-size:8.5px;color:var(--text-body-soft);margin-bottom:6px;}
   .gantt-weeks .wk{text-align:center;}
-  .gantt-row{display:grid;grid-template-columns:112px repeat(18,1fr);align-items:center;height:30px;}
-  .gantt-row .rowlabel{font-size:11px;font-weight:600;color:var(--text-heading);}
-  .gantt-track{grid-column:2/20;position:relative;height:24px;background:var(--border-soft);border-radius:4px;display:grid;grid-template-columns:repeat(18,1fr);}
-  .gseg{border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff;margin:2px 1px;white-space:nowrap;overflow:hidden;}
+  .gantt-row{display:grid;grid-template-columns:150px repeat(18,1fr);align-items:center;min-height:46px;padding:3px 0;}
+  .gantt-row .rowlabel{font-size:12px;font-weight:700;color:var(--text-heading);line-height:1.3;}
+  .gantt-row .rowlabel .sub{display:block;font-size:9.5px;font-weight:500;color:var(--text-body-soft);margin-top:1px;text-transform:none;letter-spacing:0;}
+  .gantt-track{grid-column:2/20;position:relative;height:26px;background:var(--border-soft);border-radius:4px;display:grid;grid-template-columns:repeat(18,1fr);}
+  .gseg{border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:7.6px;font-weight:700;color:#fff;margin:2px 1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 2px;min-width:0;}
   .gseg.p1{background:var(--teal-solid);}
   .gseg.hc{background:#b7bfca;color:#2b3542;}
   .gseg.p2{background:var(--navy);}
+  .gseg.c-purple{background:var(--gantt-purple);}
+  .gseg.c-blue{background:var(--gantt-blue);}
+  .gseg.c-orange{background:var(--gantt-orange);}
+  .gseg.c-black{background:var(--text-heading);}
   .gantt-legend{display:flex;gap:16px;margin-top:12px;font-size:11px;color:var(--text-body-soft);flex-wrap:wrap;}
   .gantt-legend span{display:inline-flex;align-items:center;gap:6px;}
   .gantt-legend i{width:10px;height:10px;border-radius:3px;}
@@ -293,10 +310,10 @@
       <div class="toc-item"><span class="n">07</span>Security, compliance and ownership</div>
       <div class="toc-item"><span class="n">08</span>DevOps and environments</div>
       <div class="toc-item"><span class="n">09</span>Phase 1 scope, by role</div>
-      <div class="toc-item"><span class="n">10</span>Phase 2, at a glance</div>
-      <div class="toc-item"><span class="n">11</span>Delivery approach and milestones</div>
-      <div class="toc-item"><span class="n">12</span>How we work together</div>
-      <div class="toc-item"><span class="n">13</span>Indicative plan: duration and investment</div>
+      <div class="toc-item"><span class="n">10</span>Delivery approach and milestones</div>
+      <div class="toc-item"><span class="n">11</span>How we work together</div>
+      <div class="toc-item"><span class="n">12</span>Indicative plan: Phase 1 duration and investment</div>
+      <div class="toc-item"><span class="n">13</span>Phase 2, at a glance</div>
       <div class="toc-item"><span class="n">14</span>After launch and the partnership</div>
       <div class="toc-item"><span class="n">15</span>Risks and how we handle them</div>
       <div class="toc-item"><span class="n">16</span>The team and next steps</div>
@@ -313,7 +330,7 @@
       </div>
       <div class="section-body">
         <p>Records live in silos. Solo practices get left out. A patient sees seven providers and ends up with seven portals — a login for each clinic, each holding a slice of the story and none holding the whole. When they meet a new provider, they re-key the same name, the same date of birth, the same history, and hope the labs from one place make it to the next. The record follows the clinic, not the person.</p>
-        <p>CareManager flips that. People build and own one health record that travels with them — and independent, alternative-care providers can attach to it. This proposal is scoped to <b>Phase 1</b>: the patient experience on mobile and web, and the platform behind it, ready to put in front of real providers. Phase 2 — the engagement layer and admin monetization tools — is outlined at a glance in section 10, to be scoped in full once Phase 1 is underway.</p>
+        <p>CareManager flips that. People build and own one health record that travels with them — and independent, alternative-care providers can attach to it. This proposal is scoped to <b>Phase 1</b>: the patient experience on mobile and web, and the platform behind it, ready to put in front of real providers. Phase 2 — the engagement layer and admin monetization tools — is outlined at a glance in section 13, to be scoped in full once Phase 1 is underway.</p>
         <div class="grid cols-3">
           <div class="info-card">
             <h4>What we build</h4>
@@ -562,27 +579,11 @@
         <div class="section-num">08</div>
         <div class="section-title-wrap">
           <h2>DevOps and environments</h2>
-          <div class="section-subtitle">Security and testing automated into the pipeline, not bolted on at the end.</div>
+          <div class="section-subtitle">The infrastructure and environments Phase 1 stands up.</div>
         </div>
       </div>
       <div class="section-body">
-        <div class="flow-row">
-          <div class="flow-box teal"><h5>Plan</h5></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-box teal"><h5>Code</h5></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-box teal"><h5>Build</h5></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-box teal"><h5>Test</h5></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-box teal"><h5>Release</h5></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-box teal"><h5>Operate</h5></div>
-        </div>
-        <div class="flow-legend" style="margin-top:10px;">
-          <span>Deployed to:</span>
-          <span class="pill">Dev</span><span class="pill">QA</span><span class="pill">UAT</span><span class="pill">Prod</span>
-        </div>
+        <p>The delivery pipeline and security gates that run on every change are covered in section 11; this section is the infrastructure they run on.</p>
         <div class="grid cols-2" style="margin-top:20px;">
           <div class="info-card">
             <h4>Infrastructure as code</h4>
@@ -603,7 +604,7 @@
         </div>
         <div class="callout mint">
           <div class="callout-title"><span class="dot"></span>DevOps splits across both phases</div>
-          <p>Phase 1 stands up the full HIPAA-ready foundation above: a single-AZ production environment, CI/CD, multi-tenant identity, and the security gates. <b>Multi-AZ resilience and disaster-recovery setup are Phase 2 scope</b> — see section 10 — once real usage patterns inform how the platform should scale.</p>
+          <p>Phase 1 stands up the full HIPAA-ready foundation above: a single-AZ production environment, CI/CD, multi-tenant identity, and the security gates. <b>Multi-AZ resilience and disaster-recovery setup are Phase 2 scope</b> — see section 13 — once real usage patterns inform how the platform should scale.</p>
         </div>
       </div>
     </div>
@@ -670,6 +671,235 @@
       <div class="section-head">
         <div class="section-num">10</div>
         <div class="section-title-wrap">
+          <h2>Delivery approach and milestones</h2>
+          <div class="section-subtitle">Two-week milestones, each a demonstrable release you sign off before the next begins.</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <p>This is a tentative, planning-grade shape rather than a set of hour estimates — a way to reason about sequence and cash flow together. Each milestone is two weeks, gated on your acceptance, and tied to a payment tranche.</p>
+
+        <div class="callout peach">
+          <div class="callout-title"><span class="dot"></span>Indicative, confirmed at M0</div>
+          <p>The milestones and sequence below are indicative for planning purposes. We review and firm them up together at Kickoff &amp; Planning (M0), and share the updated plan once the architecture and scope are locked.</p>
+        </div>
+
+        <div class="gantt-wrap">
+          <div class="gantt">
+            <div class="gantt-weeks">
+              <div></div>
+              <div class="wk">W1</div><div class="wk">W2</div><div class="wk">W3</div><div class="wk">W4</div><div class="wk">W5</div>
+              <div class="wk">W6</div><div class="wk">W7</div><div class="wk">W8</div><div class="wk">W9</div><div class="wk">W10</div>
+              <div class="wk">W11</div><div class="wk">W12</div><div class="wk">W13</div><div class="wk">W14</div><div class="wk">W15</div>
+              <div class="wk">W16</div><div class="wk">W17</div><div class="wk">W18</div>
+            </div>
+            <div class="gantt-row">
+              <div class="rowlabel">Kickoff &amp; Planning<span class="sub">PM · Arch · BE</span></div>
+              <div class="gantt-track">
+                <div class="gseg c-purple" style="grid-column:1/3;">Scope · plan</div>
+              </div>
+            </div>
+            <div class="gantt-row">
+              <div class="rowlabel">Foundations<span class="sub">BE · Auth</span></div>
+              <div class="gantt-track">
+                <div class="gseg p1" style="grid-column:3/5;">Auth · access</div>
+              </div>
+            </div>
+            <div class="gantt-row">
+              <div class="rowlabel">Health Record I<span class="sub">FE · BE</span></div>
+              <div class="gantt-track">
+                <div class="gseg c-blue" style="grid-column:5/7;">Core record</div>
+              </div>
+            </div>
+            <div class="gantt-row">
+              <div class="rowlabel">Health Record II<span class="sub">FE · BE</span></div>
+              <div class="gantt-track">
+                <div class="gseg c-blue" style="grid-column:7/9;">Full record</div>
+              </div>
+            </div>
+            <div class="gantt-row">
+              <div class="rowlabel">Mobile Experience<span class="sub">Mobile · BE</span></div>
+              <div class="gantt-track">
+                <div class="gseg c-orange" style="grid-column:9/11;">Mobile app</div>
+              </div>
+            </div>
+            <div class="gantt-row">
+              <div class="rowlabel">Care Coordination<span class="sub">FE · BE</span></div>
+              <div class="gantt-track">
+                <div class="gseg p1" style="grid-column:11/13;">Care tasks</div>
+              </div>
+            </div>
+            <div class="gantt-row">
+              <div class="rowlabel">Super Admin<span class="sub">FE · BE</span></div>
+              <div class="gantt-track">
+                <div class="gseg p2" style="grid-column:13/15;">Admin console</div>
+              </div>
+            </div>
+            <div class="gantt-row">
+              <div class="rowlabel">Platform Hardening<span class="sub">DevOps · Sec</span></div>
+              <div class="gantt-track">
+                <div class="gseg c-orange" style="grid-column:15/17;">Security</div>
+              </div>
+            </div>
+            <div class="gantt-row">
+              <div class="rowlabel">UAT &amp; Go-live<span class="sub">QA · all</span></div>
+              <div class="gantt-track">
+                <div class="gseg c-black" style="grid-column:17/19;">Testing</div>
+              </div>
+            </div>
+          </div>
+          <div class="gantt-legend">
+            <span><i style="background:var(--gantt-purple);"></i>Kickoff &amp; Planning</span>
+            <span><i style="background:var(--teal-solid);"></i>Build milestone</span>
+            <span><i style="background:var(--gantt-blue);"></i>Build milestone</span>
+            <span><i style="background:var(--gantt-orange);"></i>Build milestone</span>
+            <span><i style="background:var(--navy);"></i>Build milestone</span>
+            <span><i style="background:var(--text-heading);"></i>UAT &amp; Go-live</span>
+          </div>
+          <p style="margin-top:8px;font-size:11.5px;color:var(--muted-subtitle);">Two-week milestones, a live demo each week, daily standups with timezone overlap.</p>
+        </div>
+
+        <p style="margin-top:20px;font-weight:600;font-size:13px;color:var(--text-heading);">Phase 1 milestones</p>
+        <div class="vtimeline">
+          <div class="vt-item"><h5>Kickoff &amp; Planning <span class="tag">M0 · 2 wks · 20%</span></h5><p>Project setup, account provisioning, database and architecture design.</p></div>
+          <div class="vt-item"><h5>Foundations <span class="tag">M1 · 2 wks · 10%</span></h5><p>Identity, profiles, and the data-sharing / caregiving model.</p></div>
+          <div class="vt-item"><h5>Health Record I <span class="tag">M2 · 2 wks · 10%</span></h5><p>Dashboard, plus the first wave of record modules: insurance, care team, medications, allergies, vaccinations, and history.</p></div>
+          <div class="vt-item"><h5>Health Record II <span class="tag">M3 · 2 wks · 10%</span></h5><p>The remaining record modules — surgeries, visits, labs, imaging, hospitalizations, devices, and more — plus PDF/CSV export.</p></div>
+          <div class="vt-item"><h5>Mobile Experience <span class="tag">M4 · 2 wks · 10%</span></h5><p>The native iOS and Android app, camera capture, and Apple Health / Google Fit.</p></div>
+          <div class="vt-item"><h5>Care Coordination <span class="tag">M5 · 2 wks · 10%</span></h5><p>Tasks, appointments, document inbox, and notifications.</p></div>
+          <div class="vt-item"><h5>Super Admin <span class="tag">M6 · 2 wks · 10%</span></h5><p>Platform dashboard, client accounts, and the configuration library.</p></div>
+          <div class="vt-item"><h5>Platform Hardening <span class="tag">M7 · 2 wks · 10%</span></h5><p>Multi-tenant identity, file-scanning, cloud security posture, and the pre-launch pentest pass.</p></div>
+          <div class="vt-item"><h5>UAT &amp; Go-live <span class="tag">M8 · 2 wks · 10%</span></h5><p>End-to-end testing, your sign-off, and delivery.</p></div>
+        </div>
+
+        <div class="callout mint">
+          <div class="callout-title"><span class="dot"></span>On timing</div>
+          <p>Durations above are a tentative, two-week-sprint shape for planning — nine milestones for Phase 1, roughly 4 to 4.5 months. Firm calendar dates are confirmed once the team is mobilized at M0.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">11</div>
+        <div class="section-title-wrap">
+          <h2>How we work together</h2>
+          <div class="section-subtitle">One transparent process, so you always know where things stand.</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <p>Our team tracks the work internally in Jira, with code in Git under pull-request review. You get a clear window into it through Epico for the formal cadence, and Slack for the fast, day-to-day back-and-forth.</p>
+        <div class="grid cols-3">
+          <div class="info-card"><h4>Jira</h4><p>Our internal sprint board: stories, tasks, and progress across two-week milestones.</p></div>
+          <div class="info-card"><h4>Epico</h4><p>Your hub for everything: weekly status reports, discussions and decisions, feedback, release notes, and approvals, all in one shared place.</p></div>
+          <div class="info-card"><h4>Slack</h4><p>A shared channel for fast questions and quick decisions, with daily timezone overlap.</p></div>
+        </div>
+        <div class="info-card" style="margin-top:16px;"><h4>Git</h4><p>Version control with pull requests and code review, and full IP assignment to you on delivery.</p></div>
+
+        <p style="margin-top:18px;font-weight:600;font-size:13px;color:var(--text-heading);">The cadence</p>
+        <div class="vtimeline">
+          <div class="vt-item"><h5>Every day <span class="tag">SLACK + ASYNC STANDUP</span></h5><p>Fast questions and quick decisions in a shared channel, with daily overlap in your timezone.</p></div>
+          <div class="vt-item"><h5>Every week <span class="tag">EPICO</span></h5><p>A weekly status report and a live demo against the milestone. Every discussion, decision, feedback item, and release lives in Epico, so there is one shared record.</p></div>
+          <div class="vt-item"><h5>Every milestone <span class="tag">RELEASE + YOUR SIGN-OFF</span></h5><p>A demonstrable release, then your acceptance before the next milestone begins.</p></div>
+          <div class="vt-item"><h5>Delivery</h5><p>Production cutover, coordinated closely with your team.</p></div>
+          <div class="vt-item"><h5>Complimentary support · 1 month <span class="tag">BUG FIXES</span></h5><p>One month of complimentary issue and bug-fix support after delivery, on UAT or an equivalent environment, before a paid maintenance plan takes over.</p></div>
+        </div>
+
+        <p style="margin-top:28px;font-weight:600;font-size:15px;color:var(--text-heading);">Quality and security, on every change</p>
+        <p style="margin-top:6px;">Security and testing are automated into the pipeline, not a phase bolted on at the end. Security shifts left: checks run at every stage, and nothing merges or ships that has not passed them.</p>
+
+        <div class="pipeline-row">
+          <div class="pipeline-step"><div class="pipeline-box">Plan</div><div class="pipeline-sub">threat model</div></div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-step"><div class="pipeline-box">Code</div><div class="pipeline-sub">SAST<br>secrets</div></div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-step"><div class="pipeline-box">Build</div><div class="pipeline-sub">SCA<br>container</div></div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-step"><div class="pipeline-box">Test</div><div class="pipeline-sub">tests<br>DAST</div></div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-step"><div class="pipeline-box">Release</div><div class="pipeline-sub">IaC scan<br>pen-test</div></div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-step"><div class="pipeline-box">Operate</div><div class="pipeline-sub">monitoring<br>audit log</div></div>
+        </div>
+        <div class="deployed-row">
+          <span class="dlabel">Deployed to</span>
+          <span class="pill-outline">Dev</span><span class="darrow">→</span><span class="pill-outline">QA</span><span class="darrow">→</span><span class="pill-outline">UAT</span><span class="darrow">→</span><span class="pill-outline">Prod</span>
+        </div>
+        <p style="margin-top:12px;font-size:12px;color:var(--muted-subtitle);">The teal stages are the delivery pipeline; the amber items are the security gates that run automatically in CI, each one gating the merge or the deploy.</p>
+
+        <div class="grid cols-2" style="margin-top:16px;">
+          <div class="info-card">
+            <h4>Application gates (FE/BE)</h4>
+            <div class="pill-row" style="margin-top:8px;">
+              <span class="pill">SonarQube · SAST</span>
+              <span class="pill">Gitleaks · secrets</span>
+              <span class="pill">Trivy · image/fs/IaC + SBOM</span>
+              <span class="pill">OSV · dependencies</span>
+              <span class="pill">OWASP ZAP · DAST</span>
+              <span class="pill">Cosign · image signing</span>
+            </div>
+          </div>
+          <div class="info-card">
+            <h4>Infrastructure and CI</h4>
+            <div class="pill-row" style="margin-top:8px;">
+              <span class="pill">Checkov · Terraform</span>
+              <span class="pill">Prowler · cloud posture</span>
+              <span class="pill">GitHub Actions</span>
+              <span class="pill">Dependabot</span>
+            </div>
+          </div>
+        </div>
+        <p style="margin-top:12px;font-size:12px;color:var(--muted-subtitle);">The tools our secure-delivery pipeline runs — cloud-posture scanning (Prowler) is wired into CI alongside the application gates.</p>
+      </div>
+    </div>
+
+    <!-- 12 -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">12</div>
+        <div class="section-title-wrap">
+          <h2>Indicative plan: Phase 1 duration and investment</h2>
+          <div class="section-subtitle">A phased shape you can plan around, for Phase 1.</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="stat-row" style="grid-template-columns:repeat(3,1fr);">
+          <div class="stat-tile"><div class="big">~4–4.5 mo</div><div class="lbl">Phase 1 build, nine milestones</div></div>
+          <div class="stat-tile lavender"><div class="big">USD 135,057</div><div class="lbl">Phase 1 investment</div></div>
+          <div class="stat-tile"><div class="big">1 mo</div><div class="lbl">Complimentary support after delivery</div></div>
+        </div>
+
+        <p style="margin-top:20px;font-weight:600;font-size:13px;color:var(--text-heading);">Where the effort concentrates</p>
+        <div class="info-card">
+          <ul>
+            <li><b>Largest:</b> the personal health record, across web and native mobile</li>
+            <li><b>Moderate:</b> care coordination, admin operations, and the security/DevOps foundation</li>
+          </ul>
+        </div>
+
+        <p style="margin-top:18px;">Phase 1 is <b>USD 135,057</b>, delivered across nine two-week milestones — Kickoff at 20%, and each remaining milestone released at 10% on your acceptance. This is Phase 1 only; Phase 2's indicative timeline and cost are covered separately in section 13 and are not part of this total.</p>
+
+        <p style="margin-top:16px;font-weight:600;font-size:13px;color:var(--text-heading);">Phase 1 — payment by milestone</p>
+        <div class="mstone-row">
+          <div class="mstone kickoff"><div class="pct">20%</div><div class="lbl">Kickoff · M0</div></div>
+          <div class="mstone"><div class="pct">10%</div><div class="lbl">M1</div></div>
+          <div class="mstone"><div class="pct">10%</div><div class="lbl">M2</div></div>
+          <div class="mstone"><div class="pct">10%</div><div class="lbl">M3</div></div>
+          <div class="mstone"><div class="pct">10%</div><div class="lbl">M4</div></div>
+          <div class="mstone"><div class="pct">10%</div><div class="lbl">M5</div></div>
+          <div class="mstone"><div class="pct">10%</div><div class="lbl">M6</div></div>
+          <div class="mstone"><div class="pct">10%</div><div class="lbl">M7</div></div>
+          <div class="mstone"><div class="pct">10%</div><div class="lbl">M8 · UAT</div></div>
+        </div>
+        <p style="margin-top:10px;font-size:12px;color:var(--muted-subtitle);">Fixed-fee, each tranche released on your acceptance. Milestones are indicative and confirmed at M0 (see section 10).</p>
+      </div>
+    </div>
+
+    <!-- 13 -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">13</div>
+        <div class="section-title-wrap">
           <h2>Phase 2, at a glance</h2>
           <div class="section-subtitle">Kept brief by design — full scope is defined once Phase 1 is underway.</div>
         </div>
@@ -694,142 +924,7 @@
           <div class="stat-tile"><div class="big">~1.5 mo</div><div class="lbl">Indicative Phase 2 duration</div></div>
           <div class="stat-tile lavender"><div class="big">USD 42,868</div><div class="lbl">Indicative Phase 2 investment</div></div>
         </div>
-        <p style="margin-top:14px;font-size:12px;color:var(--muted-subtitle);">Indicative only — not part of this proposal's milestone plan or Phase 1 total. Firmed up in its own scoping pass once Phase 1 is underway.</p>
-      </div>
-    </div>
-
-    <!-- 11 -->
-    <div class="section">
-      <div class="section-head">
-        <div class="section-num">11</div>
-        <div class="section-title-wrap">
-          <h2>Delivery approach and milestones</h2>
-          <div class="section-subtitle">Two-week milestones, each a demonstrable release you sign off before the next begins.</div>
-        </div>
-      </div>
-      <div class="section-body">
-        <p>This is a tentative, planning-grade shape rather than a set of hour estimates — a way to reason about sequence and cash flow together. Each milestone is two weeks, gated on your acceptance, and tied to a payment tranche.</p>
-
-        <div class="callout peach">
-          <div class="callout-title"><span class="dot"></span>Indicative, confirmed at M0</div>
-          <p>The milestones and sequence below are indicative for planning purposes. We review and firm them up together at Kickoff &amp; Planning (M0), and share the updated plan once the architecture and scope are locked.</p>
-        </div>
-
-        <div class="gantt-wrap">
-          <div class="gantt">
-            <div class="gantt-weeks">
-              <div></div>
-              <div class="wk">W1</div><div class="wk">W2</div><div class="wk">W3</div><div class="wk">W4</div><div class="wk">W5</div>
-              <div class="wk">W6</div><div class="wk">W7</div><div class="wk">W8</div><div class="wk">W9</div><div class="wk">W10</div>
-              <div class="wk">W11</div><div class="wk">W12</div><div class="wk">W13</div><div class="wk">W14</div><div class="wk">W15</div>
-              <div class="wk">W16</div><div class="wk">W17</div><div class="wk">W18</div>
-            </div>
-            <div class="gantt-row">
-              <div class="rowlabel">Phase 1</div>
-              <div class="gantt-track">
-                <div class="gseg p1" style="grid-column:1/3;">M0</div>
-                <div class="gseg p1" style="grid-column:3/5;">M1</div>
-                <div class="gseg p1" style="grid-column:5/7;">M2</div>
-                <div class="gseg p1" style="grid-column:7/9;">M3</div>
-                <div class="gseg p1" style="grid-column:9/11;">M4</div>
-                <div class="gseg p1" style="grid-column:11/13;">M5</div>
-                <div class="gseg p1" style="grid-column:13/15;">M6</div>
-                <div class="gseg p1" style="grid-column:15/17;">M7</div>
-                <div class="gseg p1" style="grid-column:17/19;">M8</div>
-              </div>
-            </div>
-          </div>
-          <div class="gantt-legend">
-            <span><i style="background:var(--teal-solid);"></i>Phase 1 milestone (2 wks each)</span>
-          </div>
-        </div>
-
-        <p style="margin-top:20px;font-weight:600;font-size:13px;color:var(--text-heading);">Phase 1 milestones</p>
-        <div class="vtimeline">
-          <div class="vt-item"><h5>Kickoff &amp; Planning <span class="tag">M0 · 2 wks · 20%</span></h5><p>Project setup, account provisioning, database and architecture design.</p></div>
-          <div class="vt-item"><h5>Foundations <span class="tag">M1 · 2 wks · 10%</span></h5><p>Identity, profiles, and the data-sharing / caregiving model.</p></div>
-          <div class="vt-item"><h5>Health Record I <span class="tag">M2 · 2 wks · 10%</span></h5><p>Dashboard, plus the first wave of record modules: insurance, care team, medications, allergies, vaccinations, and history.</p></div>
-          <div class="vt-item"><h5>Health Record II <span class="tag">M3 · 2 wks · 10%</span></h5><p>The remaining record modules — surgeries, visits, labs, imaging, hospitalizations, devices, and more — plus PDF/CSV export.</p></div>
-          <div class="vt-item"><h5>Mobile Experience <span class="tag">M4 · 2 wks · 10%</span></h5><p>The native iOS and Android app, camera capture, and Apple Health / Google Fit.</p></div>
-          <div class="vt-item"><h5>Care Coordination <span class="tag">M5 · 2 wks · 10%</span></h5><p>Tasks, appointments, document inbox, and notifications.</p></div>
-          <div class="vt-item"><h5>Super Admin <span class="tag">M6 · 2 wks · 10%</span></h5><p>Platform dashboard, client accounts, and the configuration library.</p></div>
-          <div class="vt-item"><h5>Platform Hardening <span class="tag">M7 · 2 wks · 10%</span></h5><p>Multi-tenant identity, file-scanning, cloud security posture, and the pre-launch pentest pass.</p></div>
-          <div class="vt-item"><h5>UAT &amp; Go-live <span class="tag">M8 · 2 wks · 10%</span></h5><p>End-to-end testing, your sign-off, and delivery.</p></div>
-        </div>
-
-        <div class="callout mint">
-          <div class="callout-title"><span class="dot"></span>On timing</div>
-          <p>Durations above are a tentative, two-week-sprint shape for planning — nine milestones for Phase 1, roughly 4 to 4.5 months. Firm calendar dates are confirmed once the team is mobilized at M0.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- 12 -->
-    <div class="section">
-      <div class="section-head">
-        <div class="section-num">12</div>
-        <div class="section-title-wrap">
-          <h2>How we work together</h2>
-          <div class="section-subtitle">One transparent process, so you always know where things stand.</div>
-        </div>
-      </div>
-      <div class="section-body">
-        <p>Our team tracks the work internally in Jira, with code in Git under pull-request review. You get a clear window into it through weekly status reports and a shared Slack channel for fast, day-to-day back-and-forth.</p>
-        <div class="grid cols-3">
-          <div class="info-card"><h4>Jira</h4><p>Our internal sprint board: stories, tasks, and progress across two-week milestones.</p></div>
-          <div class="info-card"><h4>Slack</h4><p>A shared channel for fast questions and quick decisions, with daily timezone overlap.</p></div>
-          <div class="info-card"><h4>Git</h4><p>Version control with pull requests and code review, and full IP assignment to you on delivery.</p></div>
-        </div>
-        <p style="margin-top:18px;font-weight:600;font-size:13px;color:var(--text-heading);">The cadence</p>
-        <div class="vtimeline">
-          <div class="vt-item"><h5>Every day <span class="tag">SLACK + ASYNC STANDUP</span></h5><p>Fast questions and quick decisions in a shared channel, with daily overlap in your timezone.</p></div>
-          <div class="vt-item"><h5>Every week <span class="tag">STATUS + LIVE DEMO</span></h5><p>A weekly status report and a live demo against the milestone in progress.</p></div>
-          <div class="vt-item"><h5>Every milestone <span class="tag">RELEASE + YOUR SIGN-OFF</span></h5><p>A demonstrable release, then your acceptance before the next milestone begins.</p></div>
-          <div class="vt-item"><h5>Delivery</h5><p>Production cutover, coordinated closely with your team.</p></div>
-          <div class="vt-item"><h5>Complimentary support · 1 month <span class="tag">BUG FIXES</span></h5><p>One month of complimentary issue and bug-fix support after delivery, on UAT or an equivalent environment, before a paid maintenance plan takes over.</p></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 13 -->
-    <div class="section">
-      <div class="section-head">
-        <div class="section-num">13</div>
-        <div class="section-title-wrap">
-          <h2>Indicative plan: duration and investment</h2>
-          <div class="section-subtitle">A phased shape you can plan around.</div>
-        </div>
-      </div>
-      <div class="section-body">
-        <div class="stat-row" style="grid-template-columns:repeat(3,1fr);">
-          <div class="stat-tile"><div class="big">~4–4.5 mo</div><div class="lbl">Phase 1 build, nine milestones</div></div>
-          <div class="stat-tile lavender"><div class="big">USD 135,057</div><div class="lbl">Phase 1 investment</div></div>
-          <div class="stat-tile"><div class="big">1 mo</div><div class="lbl">Complimentary support after delivery</div></div>
-        </div>
-
-        <p style="margin-top:20px;font-weight:600;font-size:13px;color:var(--text-heading);">Where the effort concentrates</p>
-        <div class="info-card">
-          <ul>
-            <li><b>Largest:</b> the personal health record, across web and native mobile</li>
-            <li><b>Moderate:</b> care coordination, admin operations, and the security/DevOps foundation</li>
-          </ul>
-        </div>
-
-        <p style="margin-top:18px;">Phase 1 is <b>USD 135,057</b>, delivered across nine two-week milestones — Kickoff at 20%, and each remaining milestone released at 10% on your acceptance. This is Phase 1 only; Phase 2's indicative timeline and cost are covered separately in section 10 and are not part of this total.</p>
-
-        <p style="margin-top:16px;font-weight:600;font-size:13px;color:var(--text-heading);">Phase 1 — payment by milestone</p>
-        <div class="mstone-row">
-          <div class="mstone kickoff"><div class="pct">20%</div><div class="lbl">Kickoff · M0</div></div>
-          <div class="mstone"><div class="pct">10%</div><div class="lbl">M1</div></div>
-          <div class="mstone"><div class="pct">10%</div><div class="lbl">M2</div></div>
-          <div class="mstone"><div class="pct">10%</div><div class="lbl">M3</div></div>
-          <div class="mstone"><div class="pct">10%</div><div class="lbl">M4</div></div>
-          <div class="mstone"><div class="pct">10%</div><div class="lbl">M5</div></div>
-          <div class="mstone"><div class="pct">10%</div><div class="lbl">M6</div></div>
-          <div class="mstone"><div class="pct">10%</div><div class="lbl">M7</div></div>
-          <div class="mstone"><div class="pct">10%</div><div class="lbl">M8 · UAT</div></div>
-        </div>
-        <p style="margin-top:10px;font-size:12px;color:var(--muted-subtitle);">Fixed-fee, each tranche released on your acceptance. Milestones are indicative and confirmed at M0 (see section 11).</p>
+        <p style="margin-top:14px;font-size:12px;color:var(--muted-subtitle);">Indicative only — not part of Phase 1's milestone plan or investment total above. Firmed up in its own scoping pass once Phase 1 is underway.</p>
       </div>
     </div>
 
@@ -846,7 +941,7 @@
         <p style="font-weight:600;font-size:13px;color:var(--text-heading);">Support after delivery</p>
         <div class="grid cols-3">
           <div class="info-card" style="border-color:var(--teal-solid);"><h4>1 month, complimentary</h4><p>One month of complimentary support for issues and bug fixes after delivery, on UAT or an equivalent environment — no charge.</p></div>
-          <div class="info-card"><h4>Paid maintenance &amp; support</h4><p>After the complimentary month, a paid maintenance and support plan keeps the platform running — monitoring, fixes, and small iterations. <span class="confirm-box">[[TO CONFIRM: plan and pricing]]</span></p></div>
+          <div class="info-card"><h4>Paid maintenance &amp; support</h4><p>After the complimentary month, a paid maintenance and support plan keeps the platform running — monitoring, fixes, and small iterations.</p></div>
           <div class="info-card"><h4>Clean handover</h4><p>Runbooks, a recorded handover, and code in your accounts, so your team can operate it independently.</p></div>
         </div>
         <p style="margin-top:18px;font-weight:600;font-size:13px;color:var(--text-heading);">The partnership advantage</p>
