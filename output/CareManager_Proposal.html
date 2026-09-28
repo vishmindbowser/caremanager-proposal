@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CareManager — Proposal for Amy Lever</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0e2034;
+    --navy-2:#12263e;
+    --page-bg:#eceff4;
+    --card-bg:#ffffff;
+    --text-heading:#0e1826;
+    --text-body:#3a4552;
+    --text-body-soft:#5b6674;
+    --muted-subtitle:#828b9f;
+    --hero-body:#c3ccdb;
+    --hero-eyebrow:#8fd6d0;
+    --teal-num:#87cac6;
+    --teal-solid:#0b7a73;
+    --teal-solid-2:#0f9188;
+    --mint-bg:#eef9f7;
+    --mint-border:#c9ece6;
+    --peach-bg:#fdf8ef;
+    --peach-border:#f0e0c2;
+    --peach-text:#8a5a1f;
+    --lavender-bg:#f3edfb;
+    --lavender-text:#6a4c9c;
+    --border:#e5e7ec;
+    --border-soft:#eef0f3;
+    --pill-navy-bg:#e7ebf1;
+    --pill-navy-text:#26374a;
+    --pill-teal-bg:#d9f0ed;
+    --pill-teal-text:#0b7a73;
+    --shadow: 0 20px 60px -25px rgba(14,32,52,0.25);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--page-bg);
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    color:var(--text-body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Lora',Georgia,serif;
+    color:var(--text-heading);
+    margin:0;
+    font-weight:600;
+  }
+  p{margin:0;}
+  ul{margin:0;padding:0;list-style:none;}
+  .page-shell{max-width:1040px;margin:0 auto;padding:32px 20px 80px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:linear-gradient(160deg,var(--navy-2) 0%, var(--navy) 60%, #0a1a2c 100%);
+    border-radius:20px;
+    padding:56px 56px 40px;
+    color:#fff;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+  .hero-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:44px;}
+  .logo{font-family:'Lora',serif;font-size:22px;font-weight:700;color:#fff;letter-spacing:-0.02em;display:flex;align-items:center;gap:10px;}
+  .logo img{height:26px;width:auto;display:block;}
+  .logo .dot{color:var(--hero-eyebrow);}
+  .logo-tag{font-size:12px;color:#8ea0b8;font-weight:400;padding-left:12px;border-left:1px solid #2a3d52;font-family:'Inter',sans-serif;}
+  .eyebrow{
+    font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
+    color:var(--hero-eyebrow);margin-bottom:14px;
+  }
+  .hero h1{
+    font-size:42px;line-height:1.18;color:#fff;font-weight:600;max-width:760px;letter-spacing:-0.01em;
+  }
+  .hero .sub{
+    font-size:16.5px;color:var(--hero-body);max-width:680px;margin-top:22px;line-height:1.65;
+  }
+  .hero .sub b{color:#fff;font-weight:600;}
+  .meta-divider{border-top:1px solid rgba(255,255,255,0.12);margin:34px 0 26px;}
+  .meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px 40px;}
+  .meta-label{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#7e93ab;margin-bottom:6px;font-weight:600;}
+  .meta-value{font-size:14.5px;color:#e7ecf3;}
+  .hero-footnote{font-size:12px;color:#5f7288;margin-top:28px;}
+  .hero-accent-bar{height:5px;border-radius:0 0 6px 6px;background:linear-gradient(90deg,var(--teal-solid-2),var(--hero-eyebrow));margin:0 -56px -40px;}
+
+  /* ---------- CARD (main light body) ---------- */
+  .card-page{
+    background:var(--card-bg);
+    border-radius:20px;
+    box-shadow:var(--shadow);
+    margin-top:28px;
+    padding:48px 56px 56px;
+  }
+
+  /* TOC */
+  .toc-title{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted-subtitle);font-weight:700;margin-bottom:18px;}
+  .toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 40px;padding-bottom:6px;border-bottom:1px solid var(--border-soft);margin-bottom:8px;}
+  .toc-item{display:flex;gap:12px;align-items:baseline;font-size:14.5px;color:var(--text-body);}
+  .toc-item .n{color:var(--teal-solid);font-weight:700;font-size:13px;min-width:20px;}
+
+  /* SECTION */
+  .section{padding:44px 0 6px;border-top:1px solid var(--border-soft);}
+  .section:first-of-type{border-top:none;}
+  .section-head{display:flex;gap:16px;align-items:flex-start;margin-bottom:8px;}
+  .section-num{font-family:'Lora',serif;font-size:34px;font-weight:600;color:var(--teal-num);line-height:1;min-width:46px;}
+  .section-title-wrap{padding-top:2px;}
+  .section h2{font-size:25px;}
+  .section-subtitle{font-style:italic;color:var(--muted-subtitle);font-size:14.5px;margin-top:6px;}
+  .section-body{margin-left:62px;margin-top:18px;}
+  .section-body p{font-size:14.5px;color:var(--text-body);margin-bottom:14px;max-width:780px;}
+  .section-body p:last-child{margin-bottom:0;}
+  .section-body p b{color:var(--text-heading);font-weight:600;}
+
+  /* card grids */
+  .grid{display:grid;gap:16px;margin-top:18px;}
+  .grid.cols-2{grid-template-columns:1fr 1fr;}
+  .grid.cols-3{grid-template-columns:repeat(3,1fr);}
+  .grid.cols-4{grid-template-columns:repeat(4,1fr);}
+  .info-card{
+    border:1px solid var(--border);border-radius:12px;padding:18px 20px;background:#fff;
+  }
+  .info-card h4{font-size:14px;font-family:'Inter',sans-serif;font-weight:700;color:var(--text-heading);margin-bottom:8px;}
+  .info-card p{font-size:13.3px;color:var(--text-body-soft);line-height:1.55;}
+  .info-card ul{margin-top:2px;}
+  .info-card li{font-size:13.3px;color:var(--text-body-soft);line-height:1.6;position:relative;padding-left:14px;margin-bottom:4px;}
+  .info-card li::before{content:"";position:absolute;left:0;top:8px;width:4px;height:4px;border-radius:50%;background:var(--teal-solid);}
+  .info-card .eyebrow-tag{display:inline-block;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;color:var(--teal-solid);background:var(--pill-teal-bg);padding:3px 8px;border-radius:20px;margin-bottom:10px;}
+  .info-card .eyebrow-tag.warn{color:var(--peach-text);background:var(--peach-bg);border:1px solid var(--peach-border);}
+
+  .info-card.lavender{background:var(--lavender-bg);border-color:#e6dcf5;}
+
+  /* stat tiles */
+  .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:20px;}
+  .stat-tile{border:1px solid var(--border);border-radius:12px;padding:18px 18px 16px;background:#fff;}
+  .stat-tile .big{font-family:'Lora',serif;font-size:21px;font-weight:600;color:var(--text-heading);white-space:nowrap;}
+  .stat-tile .big.teal{color:var(--teal-solid);}
+  .stat-tile .lbl{font-size:12.3px;color:var(--text-body-soft);margin-top:4px;line-height:1.4;}
+  .stat-tile.lavender{background:var(--lavender-bg);border-color:#e6dcf5;}
+  .stat-tile.lavender .big{color:var(--lavender-text);}
+
+  /* pills */
+  .pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+  .pill{font-size:12px;font-weight:600;padding:6px 12px;border-radius:20px;background:var(--pill-navy-bg);color:var(--pill-navy-text);}
+  .pill.teal{background:var(--pill-teal-bg);color:var(--pill-teal-text);}
+
+  /* callouts */
+  .callout{border-radius:12px;padding:18px 20px;margin-top:18px;border:1px solid transparent;}
+  .callout.mint{background:var(--mint-bg);border-color:var(--mint-border);}
+  .callout.peach{background:var(--peach-bg);border-color:var(--peach-border);}
+  .callout-title{font-size:13.5px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px;color:var(--text-heading);}
+  .callout-title .dot{width:8px;height:8px;border-radius:50%;background:var(--teal-solid);display:inline-block;}
+  .callout.peach .callout-title .dot{background:#c9862f;}
+  .callout p{font-size:13.3px;color:var(--text-body-soft);}
+  .callout-closing{background:var(--pill-navy-bg);border-radius:12px;padding:20px 24px;margin-top:8px;}
+  .callout-closing p{font-family:'Lora',serif;font-style:italic;font-size:16px;color:var(--text-heading);line-height:1.55;}
+
+  /* flow diagram */
+  .flow-legend{display:flex;gap:18px;font-size:11.5px;color:var(--text-body-soft);margin-top:16px;flex-wrap:wrap;}
+  .flow-legend span{display:inline-flex;align-items:center;gap:6px;}
+  .flow-legend i{width:10px;height:10px;border-radius:3px;display:inline-block;}
+  .flow-row{display:flex;gap:10px;margin-top:14px;align-items:stretch;}
+  .flow-box{flex:1;border-radius:10px;padding:14px 14px;position:relative;}
+  .flow-box.teal{background:var(--mint-bg);border:1px solid var(--mint-border);}
+  .flow-box.navy{background:var(--pill-navy-bg);border:1px solid #d7dee8;}
+  .flow-tag{font-size:9.5px;letter-spacing:0.06em;text-transform:uppercase;font-weight:700;color:var(--teal-solid);margin-bottom:6px;display:block;}
+  .flow-box.navy .flow-tag{color:#4a5b70;}
+  .flow-box h5{font-size:13px;font-weight:700;color:var(--text-heading);margin-bottom:5px;font-family:'Inter',sans-serif;}
+  .flow-box p{font-size:11.8px;color:var(--text-body-soft);line-height:1.45;}
+  .flow-arrow{display:flex;align-items:center;color:var(--teal-solid);font-size:16px;padding:0 2px;}
+  .flow-caption{text-align:center;font-size:12px;font-weight:600;color:var(--peach-text);background:var(--peach-bg);border:1px solid var(--peach-border);border-radius:20px;padding:8px 16px;margin-top:16px;display:inline-block;}
+  .flow-sub{display:flex;justify-content:center;margin-top:14px;}
+  .flow-sub .flow-box{max-width:320px;flex:none;}
+
+  /* vertical timeline */
+  .vtimeline{margin-top:18px;position:relative;padding-left:22px;}
+  .vtimeline::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:var(--border);}
+  .vtimeline .vt-item{position:relative;padding-bottom:22px;}
+  .vtimeline .vt-item:last-child{padding-bottom:0;}
+  .vtimeline .vt-item::before{content:"";position:absolute;left:-22px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--teal-solid);border:2px solid #fff;box-shadow:0 0 0 1px var(--teal-solid);}
+  .vt-item h5{font-size:14px;font-weight:700;color:var(--text-heading);font-family:'Inter',sans-serif;margin-bottom:3px;}
+  .vt-item h5 .tag{font-weight:700;color:var(--teal-solid);font-size:11.5px;margin-left:8px;}
+  .vt-item p{font-size:13.2px;color:var(--text-body-soft);}
+
+  /* gantt */
+  .gantt-wrap{margin-top:22px;}
+  .gantt{width:100%;}
+  .gantt-weeks{display:grid;grid-template-columns:112px repeat(18,1fr);font-size:8.5px;color:var(--text-body-soft);margin-bottom:6px;}
+  .gantt-weeks .wk{text-align:center;}
+  .gantt-row{display:grid;grid-template-columns:112px repeat(18,1fr);align-items:center;height:30px;}
+  .gantt-row .rowlabel{font-size:11px;font-weight:600;color:var(--text-heading);}
+  .gantt-track{grid-column:2/20;position:relative;height:24px;background:var(--border-soft);border-radius:4px;display:grid;grid-template-columns:repeat(18,1fr);}
+  .gseg{border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff;margin:2px 1px;white-space:nowrap;overflow:hidden;}
+  .gseg.p1{background:var(--teal-solid);}
+  .gseg.hc{background:#b7bfca;color:#2b3542;}
+  .gseg.p2{background:var(--navy);}
+  .gantt-legend{display:flex;gap:16px;margin-top:12px;font-size:11px;color:var(--text-body-soft);flex-wrap:wrap;}
+  .gantt-legend span{display:inline-flex;align-items:center;gap:6px;}
+  .gantt-legend i{width:10px;height:10px;border-radius:3px;}
+
+  /* milestone tiles */
+  .mstone-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;}
+  .mstone{border:1px solid var(--border);border-radius:10px;padding:12px 14px;min-width:112px;flex:1;text-align:center;}
+  .mstone.kickoff{background:var(--lavender-bg);border-color:#e6dcf5;}
+  .mstone.hc{background:var(--pill-navy-bg);border-color:#d7dee8;}
+  .mstone.p2{background:var(--mint-bg);border-color:var(--mint-border);}
+  .mstone .pct{font-family:'Lora',serif;font-size:20px;font-weight:600;color:var(--text-heading);}
+  .mstone.kickoff .pct{color:var(--lavender-text);}
+  .mstone .lbl{font-size:10.5px;color:var(--text-body-soft);margin-top:3px;text-transform:uppercase;letter-spacing:0.04em;font-weight:600;}
+
+  /* risk table */
+  table.risk{width:100%;border-collapse:collapse;margin-top:16px;}
+  table.risk th{text-align:left;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted-subtitle);font-weight:700;padding:0 0 10px;border-bottom:1px solid var(--border);}
+  table.risk td{font-size:13px;color:var(--text-body-soft);padding:14px 16px 14px 0;border-bottom:1px solid var(--border-soft);vertical-align:top;}
+  table.risk td:first-child{font-weight:700;color:var(--text-heading);width:26%;}
+  table.risk tr:last-child td{border-bottom:none;}
+
+  /* team */
+  .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px;}
+
+  /* footer */
+  .footer{display:flex;justify-content:space-between;align-items:center;padding:26px 56px;font-size:12.5px;color:var(--text-body-soft);border-top:1px solid var(--border-soft);margin-top:6px;}
+  .footer b{color:var(--text-heading);}
+
+  .confirm-box{background:#fff8f0;border:1px dashed #e8c896;border-radius:8px;padding:2px 6px;color:#8a5a1f;font-weight:600;}
+
+  @media print{
+    body{background:#fff;}
+    .page-shell{max-width:none;padding:0;}
+    .hero{border-radius:0;page-break-after:avoid;}
+    .card-page{box-shadow:none;border-radius:0;margin-top:0;}
+    .section-head{break-after:avoid;page-break-after:avoid;}
+    .info-card,.stat-tile,.mstone,.flow-box,.callout,.vt-item,.gantt-wrap{break-inside:avoid;page-break-inside:avoid;}
+    table.risk tr{break-inside:avoid;page-break-inside:avoid;}
+    .grid,.stat-row,.team-grid,.mstone-row{break-inside:avoid;}
+  }
+  @page{margin:0;size:A4;}
+</style>
+</head>
+<body>
+<div class="page-shell">
+
+  <!-- ===================== HERO ===================== -->
+  <div class="hero">
+    <div class="hero-top">
+      <div class="logo"><img src="assets/mindbowser-mark.png" alt="Mindbowser"> Mindbowser</div>
+      <div class="logo-tag">Regulated healthcare engineering</div>
+    </div>
+
+    <div class="eyebrow">FOR AMY LEVER</div>
+    <h1>Your health record should belong to you, not to whichever clinic you last visited.</h1>
+    <p class="sub">CareManager puts the patient at the center: one health record people <b>build and own</b>, that travels with them across every provider they see. This proposal is scoped to Phase 1 — the full patient experience on mobile and web, and the platform behind it — with Phase 2's engagement layer outlined at a glance for what comes next. Milestone by milestone, each one signed off before the next begins.</p>
+
+    <div class="meta-divider"></div>
+    <div class="meta-grid">
+      <div>
+        <div class="meta-label">Prepared for</div>
+        <div class="meta-value">Amy Lever</div>
+      </div>
+      <div>
+        <div class="meta-label">Prepared by</div>
+        <div class="meta-value">Mindbowser</div>
+      </div>
+      <div>
+        <div class="meta-label">Engagement</div>
+        <div class="meta-value">CareManager — patient platform (mobile &amp; web) and super admin, Phase 1</div>
+      </div>
+      <div>
+        <div class="meta-label">Status</div>
+        <div class="meta-value">Proposal for review</div>
+      </div>
+    </div>
+    <div class="hero-footnote">This document is confidential and prepared for Amy Lever. Proposal date September 29, 2026 · Version 1.0 · Valid 30 days</div>
+  </div>
+
+  <!-- ===================== MAIN CARD ===================== -->
+  <div class="card-page">
+
+    <!-- TOC -->
+    <div class="toc-title">Contents</div>
+    <div class="toc-grid">
+      <div class="toc-item"><span class="n">01</span>What we propose</div>
+      <div class="toc-item"><span class="n">02</span>About Mindbowser</div>
+      <div class="toc-item"><span class="n">03</span>The problem today, and what CareManager changes</div>
+      <div class="toc-item"><span class="n">04</span>What we would build</div>
+      <div class="toc-item"><span class="n">05</span>How the pieces connect</div>
+      <div class="toc-item"><span class="n">06</span>Architecture and integrations</div>
+      <div class="toc-item"><span class="n">07</span>Security, compliance and ownership</div>
+      <div class="toc-item"><span class="n">08</span>DevOps and environments</div>
+      <div class="toc-item"><span class="n">09</span>Phase 1 scope, by role</div>
+      <div class="toc-item"><span class="n">10</span>Phase 2, at a glance</div>
+      <div class="toc-item"><span class="n">11</span>Delivery approach and milestones</div>
+      <div class="toc-item"><span class="n">12</span>How we work together</div>
+      <div class="toc-item"><span class="n">13</span>Indicative plan: duration and investment</div>
+      <div class="toc-item"><span class="n">14</span>After launch and the partnership</div>
+      <div class="toc-item"><span class="n">15</span>Risks and how we handle them</div>
+      <div class="toc-item"><span class="n">16</span>The team and next steps</div>
+    </div>
+
+    <!-- 01 -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">01</div>
+        <div class="section-title-wrap">
+          <h2>What we propose</h2>
+          <div class="section-subtitle">One record, owned by the patient, built as a focused Phase 1.</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <p>Records live in silos. Solo practices get left out. A patient sees seven providers and ends up with seven portals — a login for each clinic, each holding a slice of the story and none holding the whole. When they meet a new provider, they re-key the same name, the same date of birth, the same history, and hope the labs from one place make it to the next. The record follows the clinic, not the person.</p>
+        <p>CareManager flips that. People build and own one health record that travels with them — and independent, alternative-care providers can attach to it. This proposal is scoped to <b>Phase 1</b>: the patient experience on mobile and web, and the platform behind it, ready to put in front of real providers. Phase 2 — the engagement layer and admin monetization tools — is outlined at a glance in section 10, to be scoped in full once Phase 1 is underway.</p>
+        <div class="grid cols-3">
+          <div class="info-card">
+            <h4>What we build</h4>
+            <p>The patient experience on mobile and web, the super admin platform behind it, and the security and infrastructure foundation underneath.</p>
+          </div>
+          <div class="info-card">
+            <h4>How we work</h4>
+            <p>Two-week milestones, each a demonstrable release you sign off before the next begins. No guesses committed as fact.</p>
+          </div>
+          <div class="info-card">
+            <h4>What you own</h4>
+            <p>Full code ownership and IP assignment on delivery, in your own cloud accounts.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">02</div>
+        <div class="section-title-wrap">
+          <h2>About Mindbowser</h2>
+          <div class="section-subtitle">A healthcare-exclusive engineering partner, built for regulated work.</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <p>We build only healthcare software, for US healthcare, and we embed compliance into every phase rather than bolting it on at the end. That focus, and a bench of clinical and interoperability experts, is why founders choose us for a build that has to be secure and scalable from day one.</p>
+        <div class="stat-row">
+          <div class="stat-tile"><div class="big teal">250+</div><div class="lbl">Healthcare companies supported</div></div>
+          <div class="stat-tile"><div class="big teal">200+</div><div class="lbl">HIPAA-trained, FHIR-certified engineers</div></div>
+          <div class="stat-tile"><div class="big teal">50+</div><div class="lbl">Healthcare solution accelerators</div></div>
+          <div class="stat-tile lavender"><div class="big">SOC 2</div><div class="lbl">Type II certified (AICPA)</div></div>
+        </div>
+        <div class="grid cols-3" style="margin-top:16px;">
+          <div class="info-card">
+            <h4>Healthcare only</h4>
+            <p>We build exclusively for healthcare, with deep domain subject-matter experts on the bench, including a Chief Medical Officer and HL7/FHIR SMEs.</p>
+          </div>
+          <div class="info-card">
+            <h4>Working with the ecosystem</h4>
+            <p>Partnerships and delivery with large health systems and digital-health companies, integrating with the platforms they already run on.</p>
+          </div>
+          <div class="info-card">
+            <h4>Compliance-first</h4>
+            <p>SOC 2 Type II, HIPAA, GDPR, and FDA-aware practices embedded through every phase, not bolted on at the end.</p>
+          </div>
+        </div>
+        <p style="margin-top:18px;font-weight:600;font-size:13px;color:var(--text-heading);">Standards and certifications</p>
+        <div class="pill-row">
+          <span class="pill teal">SOC 2 Type II</span>
+          <span class="pill teal">HIPAA</span>
+          <span class="pill">GDPR</span>
+          <span class="pill">ISO 27001</span>
+          <span class="pill">HL7 / FHIR</span>
+          <span class="pill">DICOM</span>
+          <span class="pill">FDA-aware</span>
+        </div>
+        <p style="margin-top:16px;">Trusted across health systems and digital-health companies, including Northwell Health, Ochsner, Nuvance Health, Northwestern, and Epic-integrated practices. Deep integration experience with Epic, Cerner, and Athena, and a founding-team heritage in telehealth (the team behind Doxy.me).</p>
+      </div>
+    </div>
+
+    <!-- 03 -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">03</div>
+        <div class="section-title-wrap">
+          <h2>The problem today, and what CareManager changes</h2>
+          <div class="section-subtitle">The platform is being built around this exact gap.</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="grid cols-2">
+          <div class="info-card">
+            <h4>TODAY, WITHOUT A SHARED RECORD</h4>
+            <ul>
+              <li>A login for every clinic, none holding the whole story</li>
+              <li>Name, date of birth, and history re-entered at each new provider</li>
+              <li>Labs and notes that may never reach the next visit</li>
+              <li>Independent and solo practices with no shared system to plug into</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h4>WITH CAREMANAGER</h4>
+            <ul>
+              <li>One health record the patient builds and owns</li>
+              <li>A profile and history that travels with them, provider to provider</li>
+              <li>Independent, alternative-care providers able to attach to it</li>
+              <li>A clean patient experience on mobile and web from day one</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04 -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">04</div>
+        <div class="section-title-wrap">
+          <h2>What we would build</h2>
+          <div class="section-subtitle">Each part of the platform, with a one-line description of what it does.</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="grid cols-3">
+          <div class="info-card">
+            <h4>Identity &amp; Family Circle</h4>
+            <p>Sign-up, sign-in, profile switching, and secure data sharing, so a patient can manage their own record and the records of the people in their care.</p>
+          </div>
+          <div class="info-card">
+            <h4>Personal Health Record</h4>
+            <p>A complete record — insurance, care team, medications, allergies, vaccinations, history, surgeries, visits, labs, imaging, hospitalizations, devices, and more — each with its own structured entry and document attachments.</p>
+          </div>
+          <div class="info-card">
+            <h4>Care Coordination</h4>
+            <p>Tasks, appointments, a document inbox, and notifications that keep a patient on top of their own care, across every provider they see.</p>
+          </div>
+          <div class="info-card">
+            <h4>Mobile Experience</h4>
+            <p>A native iOS and Android app with the full record, camera-based document capture, and Apple Health / Google Fit integration.</p>
+          </div>
+          <div class="info-card">
+            <h4>Platform Operations</h4>
+            <p>The super admin console — client accounts, dashboards, and the configuration library the operations team runs the platform from.</p>
+          </div>
+          <div class="info-card">
+            <h4>Security &amp; Compliance Foundation</h4>
+            <p>Multi-tenant identity, encrypted storage, malware-scanned uploads, and a HIPAA-ready environment underneath every screen.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 05 -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">05</div>
+        <div class="section-title-wrap">
+          <h2>How the pieces connect</h2>
+          <div class="section-subtitle">A patient's record, and how each role reaches it.</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <p>A patient signs up once and builds a record that lives entirely inside CareManager, not inside any single clinic's system. They can add family members or invited caregivers with their own access, and share select parts of their record with a provider, one visit at a time. The Super Admin platform sits above this as the operational layer — provisioning accounts, watching platform health, and managing the configuration every patient-facing screen reads from.</p>
+        <p><b>This first build does not yet include a dedicated workspace for providers themselves</b> — the record is structured to make that a clean next step, not a rebuild.</p>
+
+        <div class="flow-legend">
+          <span><i style="background:var(--mint-bg);border:1px solid var(--mint-border);"></i>Patient-owned</span>
+          <span><i style="background:var(--pill-navy-bg);border:1px solid #d7dee8;"></i>Platform-operated</span>
+        </div>
+        <div class="flow-row">
+          <div class="flow-box teal"><span class="flow-tag">Step 1</span><h5>Signs up</h5><p>On mobile or web, patient creates their own account.</p></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box teal"><span class="flow-tag">Step 2</span><h5>Builds their record</h5><p>Adds history, medications, labs, and every record type at their own pace.</p></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box teal"><span class="flow-tag">Step 3</span><h5>Adds family &amp; caregivers</h5><p>Invites people into their circle, with their own access.</p></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box teal"><span class="flow-tag">Step 4</span><h5>Shares, per visit</h5><p>Chooses what a provider sees, one visit at a time.</p></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box navy"><span class="flow-tag">Not this phase</span><h5>Provider workspace</h5><p>A directory today; a dedicated chart &amp; schedule workspace is future-phase scope.</p></div>
+        </div>
+        <div class="flow-sub">
+          <div class="flow-box navy"><span class="flow-tag">Runs above it</span><h5>Super Admin</h5><p>Provisions accounts and watches platform health throughout.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 06 -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">06</div>
+        <div class="section-title-wrap">
+          <h2>Architecture and integrations</h2>
+          <div class="section-subtitle">A modern, typed stack, with identity and payments handled by proven services.</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="grid cols-2">
+          <div class="info-card">
+            <span class="eyebrow-tag">We build</span>
+            <h4>Application layer</h4>
+            <ul>
+              <li>React (TypeScript) — patient web portal &amp; super admin console</li>
+              <li>React Native (TypeScript) — native iOS &amp; Android patient app</li>
+              <li>Node.js — the shared backend API for web and mobile</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <span class="eyebrow-tag warn">Configured, not rebuilt</span>
+            <h4>Platform services</h4>
+            <ul>
+              <li>Keycloak — hosted identity and multi-tenant authentication</li>
+              <li>Stripe — payments and subscription billing</li>
+              <li>AWS (RDS + S3) — managed database and document storage</li>
+            </ul>
+          </div>
+        </div>
+        <div class="callout mint">
+          <div class="callout-title"><span class="dot"></span>We build the product, not the plumbing</div>
+          <p>Identity and payments run on proven, BAA-eligible services we configure rather than reinvent, so the build budget goes to the record, the record-sharing model, and the experience that is uniquely CareManager's.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 07 -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">07</div>
+        <div class="section-title-wrap">
+          <h2>Security, compliance and ownership</h2>
+          <div class="section-subtitle">Built HIPAA-ready from the first environment; certification is a process you own, and we help you run it.</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="grid cols-2">
+          <div class="info-card">
+            <h4>What CareManager protects</h4>
+            <ul>
+              <li>Encryption in transit and at rest</li>
+              <li>Malware-scanned document uploads (Yara + ClamAV)</li>
+              <li>Multi-tenant identity isolation via Keycloak</li>
+              <li>Audit logging across the platform</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h4>What you own</h4>
+            <ul>
+              <li>Full code ownership, IP assigned on delivery</li>
+              <li>Infrastructure in your own cloud account</li>
+              <li>A patient's data belongs to their record — not to any single clinic</li>
+            </ul>
+          </div>
+        </div>
+        <div class="callout peach">
+          <div class="callout-title"><span class="dot"></span>HIPAA-ready vs. HIPAA-certified</div>
+          <p>We build CareManager's platform and architecture to be <b>HIPAA-ready</b> — encryption, access controls, audit logging, and the infrastructure patterns HIPAA expects, in place from the first environment. Formal HIPAA <b>certification</b> is a compliance process CareManager itself has to complete, typically by subscribing to a compliance-automation service such as Sprinto or similar, alongside a third-party audit. Mindbowser is not the certifying party, but we help: preparing the technical evidence, closing any gaps a compliance review surfaces, and supporting the audit itself.</p>
+        </div>
+        <p style="margin-top:16px;">Mindbowser separately holds its own SOC 2 Type II certification as a company (see About Mindbowser) — that is Mindbowser's own credential, distinct from CareManager's own compliance certification, which remains yours to obtain.</p>
+      </div>
+    </div>
+
+    <!-- 08 -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">08</div>
+        <div class="section-title-wrap">
+          <h2>DevOps and environments</h2>
+          <div class="section-subtitle">Security and testing automated into the pipeline, not bolted on at the end.</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="flow-row">
+          <div class="flow-box teal"><h5>Plan</h5></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box teal"><h5>Code</h5></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box teal"><h5>Build</h5></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box teal"><h5>Test</h5></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box teal"><h5>Release</h5></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box teal"><h5>Operate</h5></div>
+        </div>
+        <div class="flow-legend" style="margin-top:10px;">
+          <span>Deployed to:</span>
+          <span class="pill">Dev</span><span class="pill">QA</span><span class="pill">UAT</span><span class="pill">Prod</span>
+        </div>
+        <div class="grid cols-2" style="margin-top:20px;">
+          <div class="info-card">
+            <h4>Infrastructure as code</h4>
+            <p>OpenTofu + Terragrunt across Dev, QA, Stage, and a HIPAA-ready single-AZ production environment.</p>
+          </div>
+          <div class="info-card">
+            <h4>Delivery pipelines</h4>
+            <p>CI/CD for the web app, the backend, and mobile app builds and store publishing (Android and iOS).</p>
+          </div>
+          <div class="info-card">
+            <h4>Security gates</h4>
+            <p>File-scanning on every upload (Yara + ClamAV), cloud posture scanning (Prowler), and a pentesting pass before go-live.</p>
+          </div>
+          <div class="info-card">
+            <h4>Multi-tenant identity</h4>
+            <p>Keycloak configured with organization support, so multi-tenancy is foundational, not retrofitted.</p>
+          </div>
+        </div>
+        <div class="callout mint">
+          <div class="callout-title"><span class="dot"></span>DevOps splits across both phases</div>
+          <p>Phase 1 stands up the full HIPAA-ready foundation above: a single-AZ production environment, CI/CD, multi-tenant identity, and the security gates. <b>Multi-AZ resilience and disaster-recovery setup are Phase 2 scope</b> — see section 10 — once real usage patterns inform how the platform should scale.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 09 -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">09</div>
+        <div class="section-title-wrap">
+          <h2>Phase 1 scope, by role</h2>
+          <div class="section-subtitle">Everything a patient needs to build their record, and the platform behind it.</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="grid cols-2">
+          <div class="info-card">
+            <span class="eyebrow-tag">Patient — Web</span>
+            <ul>
+              <li><b>Identity &amp; profiles:</b> sign-up/in, verification, password reset, Google/Apple sign-in, profile switching for family members</li>
+              <li><b>Data sharing &amp; caregiving:</b> share your record, see what's shared with you, manage caregiving requests</li>
+              <li><b>Personal health record:</b> insurance, care team directory, medications &amp; supplements, allergies, vaccinations, medical/family/social history, life events, surgeries, office visits, laboratory, imaging, hospitalizations, other procedures &amp; documents, medical devices, behavioral health, and medical aesthetics — each with document attachments</li>
+              <li><b>Care coordination:</b> dashboard, tasks, appointments, document inbox, notifications</li>
+              <li><b>Account tools:</b> settings, help center, PDF/CSV export of any record</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <span class="eyebrow-tag">Patient — Mobile (iOS &amp; Android)</span>
+            <ul>
+              <li>Full parity with the web record, built native</li>
+              <li>Camera and file capture for documents, on every record type</li>
+              <li>Apple Health / Google Fit connections</li>
+              <li>Push notifications, and the same family/caregiving model as web</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <span class="eyebrow-tag">Super Admin — Web</span>
+            <ul>
+              <li>Platform dashboard: growth and engagement metrics</li>
+              <li>Client account management, with a full audit trail</li>
+              <li>Configuration library: dropdown option lists, help center FAQs, legal document metadata, reminder templates</li>
+              <li>Notifications and settings</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <span class="eyebrow-tag">DevOps / Platform</span>
+            <ul>
+              <li>HIPAA-ready environments (Dev, QA, UAT, Prod), infrastructure as code, single-AZ production</li>
+              <li>CI/CD for web, backend, and mobile releases</li>
+              <li>Multi-tenant identity, file-scanning, cloud security posture, and a pre-launch pentest pass</li>
+              <li>Multi-AZ resilience and disaster-recovery are Phase 2 scope</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout peach" style="margin-top:20px;">
+          <div class="callout-title"><span class="dot"></span>Noted for later, not built in Phase 1 or 2</div>
+          <p>A dedicated <b>Care Coordinator (CSM)</b> role is intentionally out of scope for both phases. It's recommended for a future phase, once real Phase 1 usage shows what the coordinator's permissions and workflows actually need to be — that avoids designing it twice.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">10</div>
+        <div class="section-title-wrap">
+          <h2>Phase 2, at a glance</h2>
+          <div class="section-subtitle">Kept brief by design — full scope is defined once Phase 1 is underway.</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <p>Phase 2 builds the engagement layer and platform monetization on top of Phase 1, and continues DevOps into production resilience. It isn't broken out milestone-by-milestone here — that detail follows once Phase 1 scope is locked and real usage starts informing it.</p>
+        <div class="grid cols-3">
+          <div class="info-card">
+            <h4>Patient engagement</h4>
+            <p>Insights, goals, resources, journals, and events &amp; programs — the layer that keeps people coming back once the core record is in daily use.</p>
+          </div>
+          <div class="info-card">
+            <h4>Monetization &amp; admin</h4>
+            <p>Subscription plans &amp; services, Stripe-synced billing visibility, and platform users (sub-admin accounts) for the operations team.</p>
+          </div>
+          <div class="info-card">
+            <h4>Production resilience (DevOps)</h4>
+            <p>Multi-AZ infrastructure, disaster-recovery setup and drills, and ongoing infra optimization as real traffic arrives.</p>
+          </div>
+        </div>
+        <div class="stat-row" style="grid-template-columns:repeat(2,1fr);max-width:520px;">
+          <div class="stat-tile"><div class="big">~1.5 mo</div><div class="lbl">Indicative Phase 2 duration</div></div>
+          <div class="stat-tile lavender"><div class="big">USD 42,868</div><div class="lbl">Indicative Phase 2 investment</div></div>
+        </div>
+        <p style="margin-top:14px;font-size:12px;color:var(--muted-subtitle);">Indicative only — not part of this proposal's milestone plan or Phase 1 total. Firmed up in its own scoping pass once Phase 1 is underway.</p>
+      </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">11</div>
+        <div class="section-title-wrap">
+          <h2>Delivery approach and milestones</h2>
+          <div class="section-subtitle">Two-week milestones, each a demonstrable release you sign off before the next begins.</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <p>This is a tentative, planning-grade shape rather than a set of hour estimates — a way to reason about sequence and cash flow together. Each milestone is two weeks, gated on your acceptance, and tied to a payment tranche.</p>
+
+        <div class="callout peach">
+          <div class="callout-title"><span class="dot"></span>Indicative, confirmed at M0</div>
+          <p>The milestones and sequence below are indicative for planning purposes. We review and firm them up together at Kickoff &amp; Planning (M0), and share the updated plan once the architecture and scope are locked.</p>
+        </div>
+
+        <div class="gantt-wrap">
+          <div class="gantt">
+            <div class="gantt-weeks">
+              <div></div>
+              <div class="wk">W1</div><div class="wk">W2</div><div class="wk">W3</div><div class="wk">W4</div><div class="wk">W5</div>
+              <div class="wk">W6</div><div class="wk">W7</div><div class="wk">W8</div><div class="wk">W9</div><div class="wk">W10</div>
+              <div class="wk">W11</div><div class="wk">W12</div><div class="wk">W13</div><div class="wk">W14</div><div class="wk">W15</div>
+              <div class="wk">W16</div><div class="wk">W17</div><div class="wk">W18</div>
+            </div>
+            <div class="gantt-row">
+              <div class="rowlabel">Phase 1</div>
+              <div class="gantt-track">
+                <div class="gseg p1" style="grid-column:1/3;">M0</div>
+                <div class="gseg p1" style="grid-column:3/5;">M1</div>
+                <div class="gseg p1" style="grid-column:5/7;">M2</div>
+                <div class="gseg p1" style="grid-column:7/9;">M3</div>
+                <div class="gseg p1" style="grid-column:9/11;">M4</div>
+                <div class="gseg p1" style="grid-column:11/13;">M5</div>
+                <div class="gseg p1" style="grid-column:13/15;">M6</div>
+                <div class="gseg p1" style="grid-column:15/17;">M7</div>
+                <div class="gseg p1" style="grid-column:17/19;">M8</div>
+              </div>
+            </div>
+          </div>
+          <div class="gantt-legend">
+            <span><i style="background:var(--teal-solid);"></i>Phase 1 milestone (2 wks each)</span>
+          </div>
+        </div>
+
+        <p style="margin-top:20px;font-weight:600;font-size:13px;color:var(--text-heading);">Phase 1 milestones</p>
+        <div class="vtimeline">
+          <div class="vt-item"><h5>Kickoff &amp; Planning <span class="tag">M0 · 2 wks · 20%</span></h5><p>Project setup, account provisioning, database and architecture design.</p></div>
+          <div class="vt-item"><h5>Foundations <span class="tag">M1 · 2 wks · 10%</span></h5><p>Identity, profiles, and the data-sharing / caregiving model.</p></div>
+          <div class="vt-item"><h5>Health Record I <span class="tag">M2 · 2 wks · 10%</span></h5><p>Dashboard, plus the first wave of record modules: insurance, care team, medications, allergies, vaccinations, and history.</p></div>
+          <div class="vt-item"><h5>Health Record II <span class="tag">M3 · 2 wks · 10%</span></h5><p>The remaining record modules — surgeries, visits, labs, imaging, hospitalizations, devices, and more — plus PDF/CSV export.</p></div>
+          <div class="vt-item"><h5>Mobile Experience <span class="tag">M4 · 2 wks · 10%</span></h5><p>The native iOS and Android app, camera capture, and Apple Health / Google Fit.</p></div>
+          <div class="vt-item"><h5>Care Coordination <span class="tag">M5 · 2 wks · 10%</span></h5><p>Tasks, appointments, document inbox, and notifications.</p></div>
+          <div class="vt-item"><h5>Super Admin <span class="tag">M6 · 2 wks · 10%</span></h5><p>Platform dashboard, client accounts, and the configuration library.</p></div>
+          <div class="vt-item"><h5>Platform Hardening <span class="tag">M7 · 2 wks · 10%</span></h5><p>Multi-tenant identity, file-scanning, cloud security posture, and the pre-launch pentest pass.</p></div>
+          <div class="vt-item"><h5>UAT &amp; Go-live <span class="tag">M8 · 2 wks · 10%</span></h5><p>End-to-end testing, your sign-off, and delivery.</p></div>
+        </div>
+
+        <div class="callout mint">
+          <div class="callout-title"><span class="dot"></span>On timing</div>
+          <p>Durations above are a tentative, two-week-sprint shape for planning — nine milestones for Phase 1, roughly 4 to 4.5 months. Firm calendar dates are confirmed once the team is mobilized at M0.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12 -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">12</div>
+        <div class="section-title-wrap">
+          <h2>How we work together</h2>
+          <div class="section-subtitle">One transparent process, so you always know where things stand.</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <p>Our team tracks the work internally in Jira, with code in Git under pull-request review. You get a clear window into it through weekly status reports and a shared Slack channel for fast, day-to-day back-and-forth.</p>
+        <div class="grid cols-3">
+          <div class="info-card"><h4>Jira</h4><p>Our internal sprint board: stories, tasks, and progress across two-week milestones.</p></div>
+          <div class="info-card"><h4>Slack</h4><p>A shared channel for fast questions and quick decisions, with daily timezone overlap.</p></div>
+          <div class="info-card"><h4>Git</h4><p>Version control with pull requests and code review, and full IP assignment to you on delivery.</p></div>
+        </div>
+        <p style="margin-top:18px;font-weight:600;font-size:13px;color:var(--text-heading);">The cadence</p>
+        <div class="vtimeline">
+          <div class="vt-item"><h5>Every day <span class="tag">SLACK + ASYNC STANDUP</span></h5><p>Fast questions and quick decisions in a shared channel, with daily overlap in your timezone.</p></div>
+          <div class="vt-item"><h5>Every week <span class="tag">STATUS + LIVE DEMO</span></h5><p>A weekly status report and a live demo against the milestone in progress.</p></div>
+          <div class="vt-item"><h5>Every milestone <span class="tag">RELEASE + YOUR SIGN-OFF</span></h5><p>A demonstrable release, then your acceptance before the next milestone begins.</p></div>
+          <div class="vt-item"><h5>Delivery</h5><p>Production cutover, coordinated closely with your team.</p></div>
+          <div class="vt-item"><h5>Complimentary support · 1 month <span class="tag">BUG FIXES</span></h5><p>One month of complimentary issue and bug-fix support after delivery, on UAT or an equivalent environment, before a paid maintenance plan takes over.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 13 -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">13</div>
+        <div class="section-title-wrap">
+          <h2>Indicative plan: duration and investment</h2>
+          <div class="section-subtitle">A phased shape you can plan around.</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="stat-row" style="grid-template-columns:repeat(3,1fr);">
+          <div class="stat-tile"><div class="big">~4–4.5 mo</div><div class="lbl">Phase 1 build, nine milestones</div></div>
+          <div class="stat-tile lavender"><div class="big">USD 135,057</div><div class="lbl">Phase 1 investment</div></div>
+          <div class="stat-tile"><div class="big">1 mo</div><div class="lbl">Complimentary support after delivery</div></div>
+        </div>
+
+        <p style="margin-top:20px;font-weight:600;font-size:13px;color:var(--text-heading);">Where the effort concentrates</p>
+        <div class="info-card">
+          <ul>
+            <li><b>Largest:</b> the personal health record, across web and native mobile</li>
+            <li><b>Moderate:</b> care coordination, admin operations, and the security/DevOps foundation</li>
+          </ul>
+        </div>
+
+        <p style="margin-top:18px;">Phase 1 is <b>USD 135,057</b>, delivered across nine two-week milestones — Kickoff at 20%, and each remaining milestone released at 10% on your acceptance. This is Phase 1 only; Phase 2's indicative timeline and cost are covered separately in section 10 and are not part of this total.</p>
+
+        <p style="margin-top:16px;font-weight:600;font-size:13px;color:var(--text-heading);">Phase 1 — payment by milestone</p>
+        <div class="mstone-row">
+          <div class="mstone kickoff"><div class="pct">20%</div><div class="lbl">Kickoff · M0</div></div>
+          <div class="mstone"><div class="pct">10%</div><div class="lbl">M1</div></div>
+          <div class="mstone"><div class="pct">10%</div><div class="lbl">M2</div></div>
+          <div class="mstone"><div class="pct">10%</div><div class="lbl">M3</div></div>
+          <div class="mstone"><div class="pct">10%</div><div class="lbl">M4</div></div>
+          <div class="mstone"><div class="pct">10%</div><div class="lbl">M5</div></div>
+          <div class="mstone"><div class="pct">10%</div><div class="lbl">M6</div></div>
+          <div class="mstone"><div class="pct">10%</div><div class="lbl">M7</div></div>
+          <div class="mstone"><div class="pct">10%</div><div class="lbl">M8 · UAT</div></div>
+        </div>
+        <p style="margin-top:10px;font-size:12px;color:var(--muted-subtitle);">Fixed-fee, each tranche released on your acceptance. Milestones are indicative and confirmed at M0 (see section 11).</p>
+      </div>
+    </div>
+
+    <!-- 14 -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">14</div>
+        <div class="section-title-wrap">
+          <h2>After launch and the partnership</h2>
+          <div class="section-subtitle">The relationship doesn't end at go-live; it's where the partnership starts to compound.</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <p style="font-weight:600;font-size:13px;color:var(--text-heading);">Support after delivery</p>
+        <div class="grid cols-3">
+          <div class="info-card" style="border-color:var(--teal-solid);"><h4>1 month, complimentary</h4><p>One month of complimentary support for issues and bug fixes after delivery, on UAT or an equivalent environment — no charge.</p></div>
+          <div class="info-card"><h4>Paid maintenance &amp; support</h4><p>After the complimentary month, a paid maintenance and support plan keeps the platform running — monitoring, fixes, and small iterations. <span class="confirm-box">[[TO CONFIRM: plan and pricing]]</span></p></div>
+          <div class="info-card"><h4>Clean handover</h4><p>Runbooks, a recorded handover, and code in your accounts, so your team can operate it independently.</p></div>
+        </div>
+        <p style="margin-top:18px;font-weight:600;font-size:13px;color:var(--text-heading);">The partnership advantage</p>
+        <div class="grid cols-3">
+          <div class="info-card"><h4>Healthcare playbook</h4><p>The best practices we've learned across many US healthcare launches, applied to CareManager's record and onboarding.</p></div>
+          <div class="info-card"><h4>Expert working sessions</h4><p>Sessions with our clinical and interoperability SMEs to sharpen the record model as real providers connect.</p></div>
+          <div class="info-card"><h4>Built to scale</h4><p>Engineered to grow with your patient volume without a rebuild, so the same team can carry the provider workspace and expansion goals forward.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 15 -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">15</div>
+        <div class="section-title-wrap">
+          <h2>Risks, and how we handle them</h2>
+          <div class="section-subtitle">Named up front, with a plan already attached.</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <table class="risk">
+          <tr><th>Risk</th><th>How we handle it</th></tr>
+          <tr><td>Broad record scope</td><td>Nineteen-plus record modules ship inside a milestone-gated build; nothing merges without your sign-off, so the surface stays manageable one milestone at a time.</td></tr>
+          <tr><td>Multi-tenant identity from day one</td><td>Keycloak's organization support is configured in the Foundations milestone, before any patient-facing screen depends on it.</td></tr>
+          <tr><td>Native mobile app store review</td><td>iOS and Android submissions begin as soon as builds are stable, so review time doesn't sit on the critical path at the end.</td></tr>
+          <tr><td>The independent-provider model is new</td><td>Phase 1 and 2 ship the patient side first; the provider workspace is a deliberate next-phase scope, not something improvised inside this build.</td></tr>
+          <tr><td>Scope creep across many record types</td><td>Milestones are acceptance-gated — launch-critical modules first, the rest as an agreed fast-follow.</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 16 -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">16</div>
+        <div class="section-title-wrap">
+          <h2>The team and next steps</h2>
+          <div class="section-subtitle">A small, senior team, on it start to finish.</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <p>One accountable lead owns delivery, with daily overlap and a live demo each week.</p>
+        <div class="pill-row">
+          <span class="pill">Personal health record platforms</span>
+          <span class="pill">HIPAA-ready engineering</span>
+          <span class="pill">React &amp; React Native</span>
+          <span class="pill">Multi-tenant identity (Keycloak)</span>
+        </div>
+        <div class="team-grid">
+          <div class="info-card"><h4>Engagement lead and architect</h4><p>Owns delivery, the architecture, and the client relationship.</p></div>
+          <div class="info-card"><h4>Senior full-stack engineers</h4><p>Web, mobile, and backend, with QA alongside them.</p></div>
+          <div class="info-card"><h4>DevOps &amp; security engineer</h4><p>Infrastructure, CI/CD, and the compliance posture.</p></div>
+        </div>
+        <p style="margin-top:16px;">A business analyst front-loads Kickoff &amp; Planning; DevOps and QA run shared across the build. Named individuals and bios come with the signed proposal, along with the firm plan.</p>
+        <div class="callout-closing">
+          <p>The natural next step is a kickoff working session, where we confirm the architecture together and lock the Milestone 0 plan.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="card-page" style="margin-top:16px;padding:0;">
+    <div class="footer">
+      <div><b>Mindbowser</b> · Confidential</div>
+      <div>Proposal for Amy Lever</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
