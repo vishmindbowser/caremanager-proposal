@@ -1,0 +1,4 @@
+# Source materials — contain a third-party client's confidential proposal
+# and design-tool credentials; kept local-only, never pushed.
+/input/
+/reference/
